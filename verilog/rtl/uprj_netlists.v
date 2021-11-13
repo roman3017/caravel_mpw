@@ -21,8 +21,19 @@
     // Assume default net type to be wire because GL netlists don't have the wire definitions
     `default_nettype wire
     `include "gl/user_project_wrapper.v"
-    `include "gl/user_proj_example.v"
+    `include "gl/user_proj.v"
 `else
-    `include "user_project_wrapper.v"
-    `include "user_proj_example.v"
+    `include "../../../openlane/user_project_wrapper/src/user_project_wrapper.v"
+    `include "../../../openlane/user_proj/src/user_proj.v"
+    `include "../../../openlane/user_proj/src/soc.v"
+    `include "../../../openlane/user_proj/src/vexriscv.v"
+    `include "../../../openlane/user_proj/src/arbiter.v"
+    `include "../../../openlane/user_proj/src/fifo.v"
+    `include "../../../openlane/user_proj/src/wb_arbiter.v"
+    `include "../../../openlane/user_proj/src/wb_mux.v"
+    `include "../../../openlane/user_proj/src/wb_interconnect.v"
+    `include "../../../openlane/user_proj/src/wb_openram_wrapper.v"
+    `include "../../../openlane/user_proj/src/wb_led.v"
+    `include "../../../openlane/user_proj/src/timer_wb.v"
+    `include "../../../openlane/user_proj/src/simpleuart.v"
 `endif
