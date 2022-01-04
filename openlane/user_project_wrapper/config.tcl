@@ -33,7 +33,6 @@ set ::env(DESIGN_NAME) user_project_wrapper
 ######################################################
 # User Configurations
 
-## Source Verilog Files
 set ::env(VERILOG_FILES) "\
 	$::env(CARAVEL_ROOT)/verilog/rtl/defines.v \
 	$script_dir/src/user_project_wrapper.v"

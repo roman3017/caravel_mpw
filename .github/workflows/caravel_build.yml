@@ -48,5 +48,5 @@ jobs:
            git add def gds lef mag maglef signoff verilog
            git config user.email "rbacik@hotmail.com"
            git config user.name "roman3017"
-           git commit -m "tag action: update build"
+           git commit -m "action: update build"
            git push origin HEAD:main

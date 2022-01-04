@@ -66,14 +66,16 @@ set ::env(PL_TIME_DRIVEN) 1
 set ::env(QUIT_ON_HOLD_VIOLATIONS) 0
 set ::env(QUIT_ON_TIMING_VIOLATIONS) 0
 set ::env(QUIT_ON_SLEW_VIOLATIONS) 0
+#set ::env(QUIT_ON_LVS_ERROR) 0
+#set ::env(QUIT_ON_MAGIC_DRC) 0
 
 set ::env(ROUTING_CORES) 8
 
 set ::env(RT_MAX_LAYER) "met4"
 
 set ::env(RUN_CVC) 1
-set ::env(RUN_KLAYOUT_DRC) 0
-set ::env(RUN_MAGIC_DRC) 0
+#set ::env(RUN_KLAYOUT_DRC) 0
+#set ::env(RUN_MAGIC_DRC) 0
 
 set ::env(SYNTH_MAX_FANOUT) 4
 set ::env(SYNTH_DRIVING_CELL) "sky130_fd_sc_hd__inv_8"
