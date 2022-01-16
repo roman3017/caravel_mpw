@@ -119,8 +119,15 @@ assign io_oeb[23] = 1'b1;
 //  jtag_tck;in
 assign io_oeb[24] = 1'b1;
 
-// led;out
+// leds;out
 assign io_oeb[25] = 1'b0;
+assign io_oeb[26] = 1'b0;
+assign io_oeb[27] = 1'b0;
+assign io_oeb[28] = 1'b0;
+assign io_oeb[29] = 1'b0;
+assign io_oeb[30] = 1'b0;
+assign io_oeb[31] = 1'b0;
+assign io_oeb[32] = 1'b0;
 
 soc soc(
 `ifdef USE_POWER_PINS
@@ -133,7 +140,7 @@ soc soc(
     .wb_clk(wb_clk_i),
     .wb_rst(wb_rst_i),
 
-    .LED(io_out[25]),
+    .LEDS(io_out[32:25]),
     .MCU_UART_TX(io_out[13]),
     .MCU_UART_RX(io_in[12]),
 

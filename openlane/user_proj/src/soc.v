@@ -15,7 +15,7 @@ module soc(
   input wb_clk,
   input wb_rst,
 
-  output LED,
+  output [7:0] LEDS,
   input MCU_UART_TX,
   output MCU_UART_RX,
 
@@ -221,7 +221,7 @@ uart_wb #(
 );
 `endif
 
-// LED
+// LEDS
 wb_led led (
 `ifdef USE_POWER_PINS
   .vccd1(vccd1),	// User area 1 1.8V power
@@ -229,7 +229,7 @@ wb_led led (
 `endif
   .i_clk(wb_clk),
   .i_reset(wb_rst),
-  .o_led(LED),
+  .o_leds(LEDS),
   .i_wb_adr(wb_m2s_led0_adr),
   .i_wb_dat(wb_m2s_led0_dat),
   .i_wb_sel(wb_m2s_led0_sel),

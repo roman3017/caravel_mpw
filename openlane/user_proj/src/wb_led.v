@@ -1,6 +1,8 @@
 `default_nettype none
 
-module wb_led(
+module wb_led # (
+    parameter NUM_LEDS = 8'h08
+) (
 `ifdef USE_POWER_PINS
   inout vccd1,	// User area 1 1.8V supply
   inout vssd1,	// User area 1 digital ground
@@ -9,7 +11,7 @@ module wb_led(
     input wire i_clk,
     input wire i_reset,
     // Output
-    output reg o_led,
+    output reg [NUM_LEDS-1:0] o_leds,
     // Wishbone
     input  wire [31:0] i_wb_adr,
     input  wire [31:0] i_wb_dat,
@@ -31,7 +33,7 @@ reg [31:0] data;
 
 // output generation
 always @(posedge i_clk) begin
-    o_led <= data[0];
+    o_leds <= data;
 end
 
 // Since the incoming wishbone address from the CPU increments by 4 bytes, we
