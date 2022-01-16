@@ -8,9 +8,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PDK_ROOT:            /home/runner/work/caravel_mpw4/pdks
-      OPENLANE_ROOT:       /home/runner/work/caravel_mpw4/openlane
-      CARAVEL_ROOT:        /home/runner/work/caravel_mpw4/caravel_mpw4/caravel
+      PDK_ROOT:            /home/runner/work/caravel_mpw/pdks
+      OPENLANE_ROOT:       /home/runner/work/caravel_mpw/openlane
+      CARAVEL_ROOT:        /home/runner/work/caravel_mpw/caravel_mpw/caravel
       OPENLANE_IMAGE_NAME: efabless/openlane:mpw-3a
       OPENLANE_TAG:        2021.12.17_05.07.41
       CARAVEL_TAG:         mpw-3a
