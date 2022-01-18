@@ -62,7 +62,7 @@ set ::env(DIODE_INSERTION_STRATEGY) 0
 
 set ::env(FILL_INSERTION) 0
 
-set ::env(FP_CORE_UTIL) 30
+#set ::env(FP_CORE_UTIL) 30
 set ::env(FP_PDN_CHECK_NODES) 0
 set ::env(FP_PDN_ENABLE_RAILS) 0
 set ::env(FP_PDN_MACRO_HOOKS) " \
@@ -72,14 +72,14 @@ set ::env(FP_PDN_MACRO_HOOKS) " \
 
 set ::env(GLB_RT_MAXLAYER) 5
 set ::env(GLB_RT_OBS) " \
-  met1 300  2230 983.1  2646.54, \
-  met2 300  2230 983.1  2646.54, \
-  met3 300  2230 983.1  2646.54, \
-  met4 300  2230 983.1  2646.54, \
-  met1 1100 2230 1783.1 2646.54, \
-  met2 1100 2230 1783.1 2646.54, \
-  met3 1100 2230 1783.1 2646.54, \
-  met4 1100 2230 1783.1 2646.54"
+  met1 455  2230 1138.1 2646.54, \
+  met2 455  2230 1138.1 2646.54, \
+  met3 455  2230 1138.1 2646.54, \
+  met4 455  2230 1138.1 2646.54, \
+  met1 1175 2230 1858.1 2646.54, \
+  met2 1175 2230 1858.1 2646.54, \
+  met3 1175 2230 1858.1 2646.54, \
+  met4 1175 2230 1858.1 2646.54"
 
 set ::env(KLAYOUT_XOR_GDS) 0
 
@@ -87,7 +87,7 @@ set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro.cfg
 
 set ::env(MAGIC_DRC_USE_GDS) 0
 
-set ::env(PL_TARGET_DENSITY) [ expr ($::env(FP_CORE_UTIL)+5) / 100.0 ]
+#set ::env(PL_TARGET_DENSITY) [ expr ($::env(FP_CORE_UTIL)+5) / 100.0 ]
 set ::env(PL_RANDOM_GLB_PLACEMENT) 1
 set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
 set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 0
