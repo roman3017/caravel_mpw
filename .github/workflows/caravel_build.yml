@@ -45,7 +45,7 @@ jobs:
        - name: push
          #if: github.event_name == 'workflow_dispatch'
          run: |
-           git add def gds lef mag maglef signoff verilog
+           git add def gds lef mag maglef signoff verilog spi
            git status
            git config user.email "rbacik@hotmail.com"
            git config user.name "roman3017"

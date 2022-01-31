@@ -2,10 +2,10 @@
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
 [*] Wed Dec 29 05:13:16 2021
 [*]
-[dumpfile] "/local/home/roman/projects/opencircuitdesign/shuttle4/caravel_user_project/verilog/dv/wb_leds/wb_leds.vcd"
+[dumpfile] "/local/home/roman/projects/opencircuitdesign/shuttle4/caravel_mpw/verilog/dv/wb_leds/wb_leds.vcd"
 [dumpfile_mtime] "Wed Dec 29 05:05:55 2021"
 [dumpfile_size] 174507059
-[savefile] "/local/home/roman/projects/opencircuitdesign/shuttle4/caravel_user_project/verilog/dv/wb_leds/wb_leds.gtkw"
+[savefile] "/local/home/roman/projects/opencircuitdesign/shuttle4/caravel_mpw/verilog/dv/wb_leds/wb_leds.gtkw"
 [timestart] 0
 [size] 3092 1672
 [pos] -1 -1
