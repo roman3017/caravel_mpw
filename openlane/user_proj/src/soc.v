@@ -52,6 +52,7 @@ module soc(
 `include "wb_interconnect.vh"
 parameter ROM_BASE_ADDRESS =    32'h3000_0000;
 parameter RAM_BASE_ADDRESS =    32'h3000_1000;
+parameter HYPER_BASE_ADDRESS =  32'h3010_0000;
 parameter TIMER_BASE_ADDRESS =  32'h30ff_ff00;
 parameter UART_BASE_ADR =       32'h30ff_fe00;
 parameter LED_BASE_ADR =        32'h30ff_fd00;
