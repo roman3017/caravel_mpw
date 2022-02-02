@@ -14,7 +14,7 @@ jobs:
       OPENLANE_IMAGE_NAME: efabless/openlane:2021.12.17_05.07.41
       OPENLANE_TAG:        2021.12.17_05.07.41
       CARAVEL_TAG:         mpw-5
-      MAGIC_VERSION:       8.3.209
+      MAGIC_VERSION:       8.3.260
     steps:
        - uses: actions/checkout@v2
        - name: debug
@@ -45,6 +45,9 @@ jobs:
        - name: push
          #if: github.event_name == 'workflow_dispatch'
          run: |
+           rm -rf magic
+           ls -la
+           git status
            git add def gds lef mag maglef signoff verilog spi
            git status
            git config user.email "rbacik@hotmail.com"
