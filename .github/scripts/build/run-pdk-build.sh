@@ -20,7 +20,7 @@ export CARAVEL_ROOT=$(pwd)/caravel
 cd $RUN_ROOT/..
 echo $PWD
 export OPENLANE_ROOT=$(pwd)/openlane
-export PDK_ROOT=$(pwd)/pdks
+export PDK_ROOT=$(pwd)/openlane/pdks
 export INSTALL_SRAM=enable
 
 rm -rf $OPENLANE_ROOT $PDK_ROOT $CARAVEL_ROOT
@@ -29,9 +29,9 @@ cd $RUN_ROOT
 echo $PWD
 make install
 
-cd $CARAVEL_ROOT
-echo $PWD
-git checkout $CARAVEL_TAG
+#cd $CARAVEL_ROOT
+#echo $PWD
+#git checkout $CARAVEL_TAG
 
 cd $RUN_ROOT
 echo $PWD
