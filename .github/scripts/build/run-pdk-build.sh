@@ -35,8 +35,8 @@ git checkout $CARAVEL_TAG
 
 cd $RUN_ROOT
 echo $PWD
+make install_mcw
 make openlane
-
 #cd $OPENLANE_ROOT
 #echo $PWD
 #git checkout $OPENLANE_TAG

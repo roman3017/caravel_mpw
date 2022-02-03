@@ -7,3 +7,4 @@ git checkout $MAGIC_VERSION
 ./configure
 make
 sudo make install
+rm -rf magic

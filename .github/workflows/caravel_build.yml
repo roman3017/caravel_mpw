@@ -45,7 +45,6 @@ jobs:
        - name: push
          #if: github.event_name == 'workflow_dispatch'
          run: |
-           rm -rf magic
            ls -la
            git status
            git add def gds lef mag maglef signoff verilog spi
