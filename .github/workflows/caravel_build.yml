@@ -11,10 +11,10 @@ jobs:
       OPENLANE_ROOT:       /home/runner/work/caravel_mpw/openlane
       PDK_ROOT:            /home/runner/work/caravel_mpw/openlane/pdks
       CARAVEL_ROOT:        /home/runner/work/caravel_mpw/caravel_mpw/caravel
-      OPENLANE_IMAGE_NAME: efabless/openlane:2021.12.17_05.07.41
-      OPENLANE_TAG:        2021.12.17_05.07.41
+      OPENLANE_IMAGE_NAME: efabless/openlane:2021.11.23_01.42.34
+      OPENLANE_TAG:        2021.11.23_01.42.34
       CARAVEL_TAG:         mpw-5
-      MAGIC_VERSION:       8.3.260
+      MAGIC_VERSION:       8.3.265
     steps:
        - uses: actions/checkout@v2
        - name: debug
@@ -32,18 +32,18 @@ jobs:
          run:  make uncompress
        - name: build user gds
          run: |
-           make user_proj \
-           || make user_proj \
-           || make user_proj \
-           || make user_proj \
-           || make user_proj
+           bash .github/scripts/build/build-user.sh \
+           || bash .github/scripts/build/build-user.sh \
+           || bash .github/scripts/build/build-user.sh \
+           || bash .github/scripts/build/build-user.sh \
+           || bash .github/scripts/build/build-user.sh
        - name: build wrapper gds
          run: |
-           make user_project_wrapper \
-           || make user_project_wrapper \
-           || make user_project_wrapper \
-           || make user_project_wrapper \
-           || make user_project_wrapper
+           bash .github/scripts/build/build-wrapper.sh \
+           || bash .github/scripts/build/build-wrapper.sh \
+           || bash .github/scripts/build/build-wrapper.sh \
+           || bash .github/scripts/build/build-wrapper.sh \
+           || bash .github/scripts/build/build-wrapper.sh
        - name: compress
          run:  make compress
        - name: push

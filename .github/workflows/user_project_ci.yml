@@ -38,7 +38,7 @@ jobs:
     env: 
       OPENLANE_TAG: 2021.12.17_05.07.41
       CARAVEL_TAG: mpw-5
-      MAGIC_VERSION: 8.3.260
+      MAGIC_VERSION: 8.3.265
     steps:
        - uses: actions/checkout@v2
        - name: install deps
@@ -54,7 +54,7 @@ jobs:
     env: 
       OPENLANE_TAG: 2021.12.17_05.07.41
       CARAVEL_TAG: mpw-5
-      MAGIC_VERSION: 8.3.260
+      MAGIC_VERSION: 8.3.265
     steps:
        - uses: actions/checkout@v2
        - name: install deps
