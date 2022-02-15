@@ -97,6 +97,9 @@ Complete roundtrip for caravel_user_project
 	# you can then run the simulations using
 	make verify-<testbench-name>
 	
+	# Test benches are:
+	# io_ports, la_test1, la_test2, wb_port, mprj_stimulus
+	
 	# for example
 	make verify-io_ports
 	
