@@ -6,80 +6,38 @@ on:
     types:
        - completed
 jobs:
-  precheck0:
+  precheck:
     timeout-minutes: 720
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-
       - name: Install Magic
         run: bash ${GITHUB_WORKSPACE}/.github/scripts/install_magic.sh
-
       - name: Build PDK
         run: bash ${GITHUB_WORKSPACE}/.github/scripts/build_pdk.sh
-
       - name: Install The Precheck
         run: git clone --depth=1 https://github.com/efabless/mpw_precheck.git ${GITHUB_WORKSPACE}/mpw_precheck
-
       - name: Run The Precheck
         run: bash ${GITHUB_WORKSPACE}/.github/scripts/run_precheck.sh
-  precheck:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
-    env:
-      OPENLANE_ROOT:       /home/runner/work/caravel_mpw/openlane
-      PDK_ROOT:            /home/runner/work/caravel_mpw/openlane/pdks
-      CARAVEL_ROOT:        /home/runner/work/caravel_mpw/caravel_mpw/caravel
-      PRECHECK_IMAGE_NAME: efabless/mpw_precheck:latest
-      OPENLANE_TAG:        2021.11.23_01.42.34
-      CARAVEL_TAG:         mpw-5a
-      MAGIC_VERSION:       8.3.265
-      MCW:                 PICO
-    steps:
-      - uses: actions/checkout@v2
-      - name: install deps
-        run:  bash .github/scripts/build/run-install-magic.sh
-      - name: install caravel
-        run:  |
-           make install
-           make install_mcw
-           make openlane
-           make pdk-with-sram
-      - name: Install The Precheck
-        run: bash .github/scripts/precheck/precheckBuild.sh 1
-      - name: Sanitize The Precheck
-        run: |
-          gzip -d -f gds/*
-      - name: Run The Precheck
-        run: bash .github/scripts/precheck/run-precheck.sh
   dv_rtl:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     env: 
       OPENLANE_ROOT:       /home/runner/work/caravel_mpw/openlane
-      PDK_ROOT:            /home/runner/work/caravel_mpw/openlane/pdks
-      CARAVEL_ROOT:        /home/runner/work/caravel_mpw/caravel_mpw/caravel
-      OPENLANE_IMAGE_NAME: efabless/openlane:2021.11.23_01.42.34
-      OPENLANE_TAG:        2021.11.23_01.42.34
-      CARAVEL_TAG:         mpw-5a
-      MAGIC_VERSION:       8.3.265
-      MCW:                 PICO
+      PDK_ROOT:            /home/runner/work/caravel_mpw/pdks
+      CARAVEL_ROOT:        /home/runner/work/caravel_mpw/caravel_mpw/caravel-lite
     steps:
        - uses: actions/checkout@v2
-       - name: install deps
-         run:  bash .github/scripts/build/run-install-magic.sh
-       - name: install caravel
-         run:  |
-           make install
-           make install_mcw
-           make openlane
-           make pdk-with-sram
+       - name: Install Magic
+         run: bash ${GITHUB_WORKSPACE}/.github/scripts/install_magic.sh
+       - name: Build PDK
+         run: bash ${GITHUB_WORKSPACE}/.github/scripts/build_pdk.sh
+       - name: Install MCW
+         run: make install_mcw MCW=PICO
        - name: Run DV tests
          # Run test number 0,1,2,3,4 in one job       <test-ids>   <sim-mode>
          run: bash .github/scripts/dv/run-dv-tests.sh 4            RTL
@@ -88,23 +46,16 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       OPENLANE_ROOT:       /home/runner/work/caravel_mpw/openlane
-      PDK_ROOT:            /home/runner/work/caravel_mpw/openlane/pdks
-      CARAVEL_ROOT:        /home/runner/work/caravel_mpw/caravel_mpw/caravel
-      OPENLANE_IMAGE_NAME: efabless/openlane:2021.11.23_01.42.34
-      OPENLANE_TAG:        2021.11.23_01.42.34
-      CARAVEL_TAG:         mpw-5a
-      MAGIC_VERSION:       8.3.265
-      MCW:                 PICO
+      PDK_ROOT:            /home/runner/work/caravel_mpw/pdks
+      CARAVEL_ROOT:        /home/runner/work/caravel_mpw/caravel_mpw/caravel-lite
     steps:
        - uses: actions/checkout@v2
-       - name: install deps
-         run:  bash .github/scripts/build/run-install-magic.sh
-       - name: install caravel
-         run:  |
-           make install
-           make install_mcw
-           make openlane
-           make pdk-with-sram
+       - name: Install Magic
+         run: bash ${GITHUB_WORKSPACE}/.github/scripts/install_magic.sh
+       - name: Build PDK
+         run: bash ${GITHUB_WORKSPACE}/.github/scripts/build_pdk.sh
+       - name: Install MCW
+         run: make install_mcw MCW=PICO
        - name: Run DV tests
          # Run test number 0,1,2,3,4 in one job       <test-ids>   <sim-mode>
          run: bash .github/scripts/dv/run-dv-tests.sh 4            GL

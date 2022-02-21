@@ -25,10 +25,12 @@
 		- Checks led value through the wishbone port
 */
 
-#define reg_wb_leds (*(volatile uint32_t*)0x30fffd00)
+#define reg_srom (*(volatile uint32_t*)0x30000000)
+#define reg_sram (*(volatile uint32_t*)0x30001000)
 
 void main()
 {
+
 	/* 
 	IO Control Registers
 	| DM     | VTRIP | SLOW  | AN_POL | AN_SEL | AN_EN | MOD_SEL | INP_DIS | HOLDH | OEB_N | MGMT_EN |
@@ -48,34 +50,37 @@ void main()
 	/* Set up the housekeeping SPI to be connected internally so	*/
 	/* that external pin changes don't affect it.			*/
 
-	// reg_spi_enable = 1;
-	// reg_spimaster_cs = 0x10001;
-	// reg_spimaster_control = 0x0801;
-
-	// reg_spimaster_control = 0xa002;	// Enable, prescaler = 2,
-                                        // connect to housekeeping SPI
-
+	//reg_spimaster_config = 0xa002;	// Enable, prescaler = 2,
+	// connect to housekeeping SPI
 	// Connect the housekeeping SPI to the SPI master
 	// so that the CSB line is not left floating.  This allows
 	// all of the GPIO pins to be used for user functions.
 
-	reg_mprj_io_32 = GPIO_MODE_USER_STD_OUTPUT;//led
-	reg_mprj_io_31 = GPIO_MODE_USER_STD_OUTPUT;//led
-	reg_mprj_io_30 = GPIO_MODE_USER_STD_OUTPUT;//led
-	reg_mprj_io_29 = GPIO_MODE_USER_STD_OUTPUT;//led
-	reg_mprj_io_28 = GPIO_MODE_USER_STD_OUTPUT;//led
-	reg_mprj_io_27 = GPIO_MODE_USER_STD_OUTPUT;//led
-	reg_mprj_io_26 = GPIO_MODE_USER_STD_OUTPUT;//led
-	reg_mprj_io_25 = GPIO_MODE_USER_STD_OUTPUT;//led
 	//reg_mprj_io_20 = GPIO_MODE_USER_STD_INPUT_PULLDOWN;//trstb
 	//reg_mprj_io_19 = GPIO_MODE_USER_STD_INPUT_PULLDOWN;//srstb
+
+	reg_mprj_io_18 = GPIO_MODE_MGMT_STD_OUTPUT;
+	reg_mprj_io_17 = GPIO_MODE_MGMT_STD_OUTPUT;
+	reg_mprj_io_16 = GPIO_MODE_MGMT_STD_OUTPUT;
 
 	/* Apply configuration */
 	reg_mprj_xfer = 1;
 	while (reg_mprj_xfer == 1);
 
-	// set the led, signalling the end of the test
-	reg_wb_leds = 0xaa;
-	reg_wb_leds = 0xff;
-}
+	// Flag start of the test
+	reg_mprj_datal = 0x00050000;
 
+	// set the sram, signalling the end of the test
+	if (reg_sram != 0x01234567)
+		reg_sram = 0x01234567;
+
+	if (reg_sram == 0x01234567)
+		reg_mprj_datal = 0x00060000;
+/*
+	if (reg_srom != 0xdeadbeef)
+		reg_srom = 0xdeadbeef;
+
+	if (reg_srom == 0xdeadbeef)
+		reg_mprj_datal = 0x00070000;
+*/
+}

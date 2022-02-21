@@ -19,7 +19,7 @@
 .SUFFIXES:
 .SILENT: clean all
 
-PATTERNS = wb_leds
+PATTERNS = wb_leds wb_sram
 
 all:  ${PATTERNS}
 	for i in ${PATTERNS}; do \

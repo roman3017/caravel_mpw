@@ -21,7 +21,7 @@
 `include "caravel_netlists.v"
 `include "spiflash.v"
 
-module wb_leds_tb;
+module wb_sram_tb;
 	reg clock;
 	reg RSTB;
 	reg CSB;
@@ -30,9 +30,9 @@ module wb_leds_tb;
 
 	wire gpio;
 	wire [37:0] mprj_io;
-	wire [7:0] led;
+	wire [2:0] checkbits;
 
-	assign led = mprj_io[32:25];
+	assign checkbits = mprj_io[18:16];
 
 	assign mprj_io[3] = (CSB == 1'b1) ? 1'b1 : 1'bz;
 	// assign mprj_io[3] = 1'b1;
@@ -48,8 +48,8 @@ module wb_leds_tb;
 	end
 
 	initial begin
-		$dumpfile("wb_leds.vcd");
-		$dumpvars(0, wb_leds_tb);
+		$dumpfile("wb_sram.vcd");
+		$dumpvars(0, wb_sram_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
 		repeat (25) begin
@@ -67,15 +67,15 @@ module wb_leds_tb;
 	end
 
 	initial begin
-		// wait for leds to get set
-		wait(led == 8'h00);
-		$display("Monitor: LED=0x00");
+		wait(checkbits == 3'h5);
+		$display("Monitor: checkbits=5");
 
-		wait(led == 8'haa);
-		$display("Monitor: LED=0xaa");
+		wait(checkbits == 3'h6);
+		$display("Monitor: checkbits=6");
 
-//		wait(led == 8'hff);
-//		$display("Monitor: LED=0xff");
+//		wait(checkbits == 3'h7);
+//		$display("Monitor: checkbits=7");
+
 		`ifdef GL
 	    	$display("Monitor: Test 1 Mega-Project IO (GL) Passed");
 		`else
@@ -109,7 +109,7 @@ module wb_leds_tb;
 	end
 
 	always @(mprj_io) begin
-		#1 $display("MPRJ-IO state = %b ", mprj_io[32:25]);
+		#1 $display("MPRJ-IO state = %b ", mprj_io[18:16]);
 	end
 
 	wire flash_csb;
@@ -149,7 +149,7 @@ module wb_leds_tb;
 	);
 
 	spiflash #(
-		.FILENAME("wb_leds.hex")
+		.FILENAME("wb_sram.hex")
 	) spiflash (
 		.csb(flash_csb),
 		.clk(flash_clk),

@@ -15,7 +15,7 @@
 
 `default_nettype none
 
-module wb_openram_wrapper1
+module wb_openram_wrapper
 #(
     parameter BASE_ADDR = 32'h3000_0000,
     parameter ADDR_WIDTH = 9
@@ -60,14 +60,14 @@ always @(posedge wb_clk_i) begin
     end
 end
 
-assign ram_csb0 = ~wbs_stb_i;
+assign ram_csb0 = ~(wbs_cyc_i & wbs_stb_i);
 assign ram_web0 = ~wbs_we_i;
 assign ram_wmask0 = wbs_sel_i;
 assign ram_addr0 = wbs_adr_i[ADDR_WIDTH-1:0];
 
 endmodule	// wb_openram_wrapper
 
-module wb_openram_wrapper
+module wb_openram_wrapper1
 #(
     parameter BASE_ADDR = 32'h3000_0000,
     parameter ADDR_WIDTH = 9
@@ -95,8 +95,8 @@ module wb_openram_wrapper
     output                      ram_web0,
     output  [3:0]              	ram_wmask0,
     output  [ADDR_WIDTH-1:0]    ram_addr0,
-    input   [31:0]              ram_dout0,
-    output  [31:0]              ram_din0
+    output  [31:0]              ram_din0,
+    input   [31:0]              ram_dout0
 );
 
     wire valid;

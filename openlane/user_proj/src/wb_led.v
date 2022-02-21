@@ -46,22 +46,16 @@ always @(posedge i_clk) begin
         o_wb_ack <= 0;
         data <= 0;
     end else begin
-        // Wishbone interface logic
         o_wb_ack <= 1'b0;
-        if (i_wb_cyc && i_wb_stb && !o_wb_ack) begin
+        if (i_wb_cyc & i_wb_stb & ~o_wb_ack) begin
             o_wb_ack <= 1'b1;
-
-            // Register read
             case (register_index)
-                wb_r_DATA: o_wb_dat <= data;
+                wb_r_DATA: begin
+                    o_wb_dat <= data;
+                    if (i_wb_we)
+                        data <= i_wb_dat;
+                end
             endcase
-
-            // Register write
-            if (i_wb_we) begin
-                case (register_index)
-                    wb_r_DATA: data <= i_wb_dat;
-                endcase
-            end
         end
     end
 end

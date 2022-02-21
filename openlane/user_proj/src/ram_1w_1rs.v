@@ -40,12 +40,12 @@ sky130_sram_1kbyte_1rw1r_32x256_8 ram (
     .csb0   (~wr_en),
     .web0   (~wr_en),
     .wmask0 (wr_mask0),
-    .addr0  (wr_addr),
+    .addr0  (wr_addr[7:0]),
     .din0   (wr_data),
     .dout0  (),
     .clk1   (rd_clk),
     .csb1   (~rd_en),
-    .addr1  (rd_addr),
+    .addr1  (rd_addr[7:0]),
     .dout1  (rd_data)
 );
 endmodule
